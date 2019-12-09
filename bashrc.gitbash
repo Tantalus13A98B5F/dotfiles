@@ -1,3 +1,5 @@
+hash -p /usr/bin/openssl openssl
+
 # SSH completions
 _ssh_hosts () {
   if [ "$1" = scp -o "$1" = sftp ]
