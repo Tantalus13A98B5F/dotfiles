@@ -1,3 +1,4 @@
+#!/bin/bash
 shopt -q login_shell || source /etc/profile.d/aliases.sh
 hash -p /usr/bin/openssl openssl
 export LANG=en_US.UTF-8
