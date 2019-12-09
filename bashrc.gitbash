@@ -12,3 +12,12 @@ _ssh_hosts () {
 complete -F _ssh_hosts ssh
 complete -F _ssh_hosts sftp
 complete -F _ssh_hosts -f scp
+
+# user defined alias
+case "$TERM" in xterm*)
+  alias powershell="winpty powershell.exe"
+  alias python="winpty python.exe"
+;; esac
+alias la="ls -a"
+alias man="wslbridge -t man"
+alias tldr="wslbridge -t tldr"
