@@ -1,0 +1,10 @@
+# SSH completions
+_ssh_hosts () {
+  if [ "$1" = scp -o "$1" = sftp ]
+    then awks='{print $2":"}'; else awks='{print $2}'; fi
+  opts=$(grep '^Host\>' ~/.ssh/config | awk "$awks")
+  COMPREPLY=( $(compgen -W "$opts" -- "$2") )
+}
+complete -F _ssh_hosts ssh
+complete -F _ssh_hosts sftp
+complete -F _ssh_hosts -f scp
