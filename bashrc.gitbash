@@ -1,24 +1,39 @@
-#!/bin/bash
 shopt -q login_shell || source /etc/profile.d/aliases.sh
 hash -p /usr/bin/openssl openssl
 export LANG=en_US.UTF-8
 
+
 # SSH completions
+
 _ssh_hosts () {
-  if [ "$1" = scp -o "$1" = sftp ]
-    then awks='{print $2":"}'; else awks='{print $2}'; fi
-  opts=$(grep '^Host\>' ~/.ssh/config | awk "$awks")
+  if [ "$1" = ssh ]; then trailing=''; else trailing='":"'; fi
+  opts=$(awk "/^Host\\>/ {print \$2${trailing}}" ~/.ssh/config)
   COMPREPLY=( $(compgen -W "$opts" -- "$2") )
 }
+export COMP_WORDBREAKS=${COMP_WORDBREAKS//:}
 complete -F _ssh_hosts ssh
 complete -F _ssh_hosts sftp
 complete -F _ssh_hosts -f scp
 
+
 # user defined alias
-case "$TERM" in xterm*)
+
+case "$TERM" in xterm*)  # inside Git Bash
   alias powershell="winpty powershell.exe"
   alias python="winpty python.exe"
 ;; esac
 alias la="ls -a"
 alias man="wslbridge -t man"
 alias tldr="wslbridge -t tldr"
+
+
+# start ssh-agent
+
+agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+if [ "$agent_run_state" = 2 ]; then
+  rm -rf /tmp/ssh-*
+  eval $(ssh-agent -s)
+  winpty setx SSH_AUTH_SOCK $SSH_AUTH_SOCK
+  winpty setx SSH_AGENT_PID $SSH_AGENT_PID
+  ssh-add
+fi
