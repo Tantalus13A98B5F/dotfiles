@@ -32,6 +32,12 @@ set mouse=a
 nnoremap j gj
 nnoremap k gk
 
+" Tags
+set tags=tags
+nnoremap <leader>] :tnext<CR>
+nnoremap <leader>[ :tprev<CR>
+nnoremap <leader>T <C-w>]<C-w>T
+
 " Edit
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 noremap <leader>m mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
