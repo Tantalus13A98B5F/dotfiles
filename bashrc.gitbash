@@ -1,3 +1,4 @@
+#!/bin/bash
 shopt -q login_shell || source /etc/profile.d/aliases.sh
 hash -p /usr/bin/openssl openssl
 export LANG=en_US.UTF-8
@@ -29,11 +30,27 @@ alias tldr="wslbridge -t tldr"
 
 # start ssh-agent
 
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-if [ "$agent_run_state" = 2 ]; then
+# use ~/.ssh/.env for terminal tools
+_SSH_ENV_FILE=~/.ssh/.env
+[ -f $_SSH_ENV_FILE ] && source $_SSH_ENV_FILE
+
+# catch connection failure
+if [ "$(ssh-add -l >/dev/null 2>&1; echo $?)" = 2 ]; then
+
+  # clean remnants of prior runs
   rm -rf /tmp/ssh-*
-  eval $(ssh-agent -s)
+  for pid in $(ps aux | awk '/ssh-agent/ {print $1}'); do
+    kill $pid
+  done
+
+  # update $_SSH_ENV_FILE - silent
+  echo "$(ssh-agent -s | head -n2)" >$_SSH_ENV_FILE
+  source $_SSH_ENV_FILE
+
+  # setting vars for windows tools
   winpty setx SSH_AUTH_SOCK $SSH_AUTH_SOCK
   winpty setx SSH_AGENT_PID $SSH_AGENT_PID
+
+  # add key
   ssh-add
 fi
