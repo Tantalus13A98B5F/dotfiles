@@ -1,8 +1,11 @@
 set nocompatible
+let mapleader=";"
 
 " View
 syntax on
 set background=dark
+set encoding=utf-8
+set scrolloff=2
 set cursorline
 set showmode
 set showcmd
@@ -10,14 +13,16 @@ set wildmenu
 
 " Indent
 filetype plugin indent on
-set et sw=4 ts=4 sts=4
+set expandtab smarttab sw=4 ts=4
 autocmd FileType make setlocal noet
-set autoindent
+set autoindent smartindent
 set modeline
 
 " Search
-set incsearch
-set hlsearch
+set incsearch hlsearch
+set ignorecase smartcase
+vnoremap * y/<C-r>"<CR>
+map <leader><CR> :noh<CR>
 
 " Navigation
 autocmd BufReadPost *
@@ -26,6 +31,13 @@ autocmd BufReadPost *
 set mouse=a
 nnoremap j gj
 nnoremap k gk
+
+" Edit
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+noremap <leader>m mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
+map <leader>pp :setlocal paste!<CR>:set paste?<CR>
+inoremap jk <ESC>
+set noswapfile
 
 " Vim-Plug
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -41,7 +53,6 @@ Plug 'scrooloose/nerdtree'
 call plug#end()
 
 " Plugin Keymap
-let mapleader=";"
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <C-p> :FZF<CR>
 
