@@ -69,5 +69,10 @@ let g:lightline = {
       \ }
 
 " Plugin Keymap
-nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <C-p> :FZF<CR>
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>h :History<CR>
+nnoremap <leader>t :Tags<CR>
+nnoremap <leader>ft :Filetypes<CR>
+nnoremap <leader>b :Buffers<CR>
