@@ -43,6 +43,8 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 noremap <leader>m mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
 map <silent> <leader>pp :setlocal paste!<CR>
 inoremap jk <ESC>
+vnoremap ( <ESC>`>a)<ESC>`<i(<ESC>
+inoremap ( ()<ESC>i
 set noswapfile
 
 " Vim-Plug
