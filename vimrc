@@ -5,10 +5,11 @@ let mapleader=";"
 syntax on
 set background=dark
 set encoding=utf-8
-set scrolloff=2
+set scrolloff=0
 set cursorline
 set showcmd
 set wildmenu
+set t_vb=
 
 " Indent
 filetype plugin indent on
@@ -64,9 +65,12 @@ call plug#end()
 
 " LightLine
 set noshowmode laststatus=2
+if &term == 'screen'
+  set t_Co=256
+endif
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ }
+  \   'colorscheme': 'solarized',
+  \ }
 
 " Plugin Keymap
 nnoremap <leader>n :NERDTreeToggle<CR>
