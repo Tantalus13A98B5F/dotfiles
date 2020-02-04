@@ -7,7 +7,6 @@ set background=dark
 set encoding=utf-8
 set scrolloff=2
 set cursorline
-set showmode
 set showcmd
 set wildmenu
 
@@ -34,14 +33,15 @@ nnoremap k gk
 
 " Tags
 set tags=tags
+set nocscopetag
 nnoremap <leader>] :tnext<CR>
 nnoremap <leader>[ :tprev<CR>
-nnoremap <leader>T <C-w>]<C-w>T
+nnoremap <C-w><C-]> <C-w>]<C-w>T
 
 " Edit
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 noremap <leader>m mmHmt:%s/<C-v><CR>//ge<CR>'tzt'm
-map <leader>pp :setlocal paste!<CR>:set paste?<CR>
+map <silent> <leader>pp :setlocal paste!<CR>
 inoremap jk <ESC>
 set noswapfile
 
@@ -56,9 +56,16 @@ Plug 'junegunn/fzf', {'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
+
+" LightLine
+set noshowmode laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ }
 
 " Plugin Keymap
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <C-p> :FZF<CR>
-
