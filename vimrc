@@ -33,7 +33,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Tags
-set tags=tags
+set tags=./.tags;
 set nocscopetag
 nnoremap <leader>] :tnext<CR>
 nnoremap <leader>[ :tprev<CR>
