@@ -1,5 +1,4 @@
 #!/bin/bash
-shopt -q login_shell || source /etc/profile.d/aliases.sh
 hash -p /usr/bin/openssl openssl
 export LANG=en_US.UTF-8
 
@@ -22,10 +21,12 @@ complete -F _ssh_hosts -f scp
 case "$TERM" in xterm*)  # inside Git Bash
   alias powershell="winpty powershell.exe"
   alias python="winpty python.exe"
+  alias wsl="wslbridge -t"
 ;; esac
+alias ls="ls -I 'ntuser.*' -I 'NTUSER.*' --color=auto -F"
 alias la="ls -a"
-alias man="wslbridge -t man"
-alias tldr="wslbridge -t tldr"
+alias man="wsl man"
+alias tldr="wsl tldr"
 
 
 # start ssh-agent
