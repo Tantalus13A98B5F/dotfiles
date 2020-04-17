@@ -8,7 +8,7 @@ Major features include,
 
 - Auto-completion support for SSH hosts;
 - Start `ssh-agent` automatically;
-- Fixed issues when not started as login shell;
+- ~Fixed issues when not started as login shell;~ Why not start bash using `-l -i`
 
 ## tmux.conf
 
