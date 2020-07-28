@@ -49,13 +49,13 @@ vnoremap { ><ESC>`<O{<ESC>`>o}<ESC>`<
 set noswapfile
 
 " Vim-Plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', {'do': './install --bin'}
+Plug 'junegunn/fzf' ", {'do': './install --bin'}
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
