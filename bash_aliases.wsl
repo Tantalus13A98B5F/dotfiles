@@ -1,0 +1,15 @@
+#!/bin/bash
+alias ls="ls --color=auto -I ntuser.\* -I NTUSER.\*"
+
+wslcd () {
+    read -r tempvar
+    cd "$(wslpath "$tempvar")"
+}
+
+wslhost () {
+    ip route | awk '/default/ {print $3}'
+}
+
+alias powershell="powershell.exe"
+alias choco="choco.exe"
+alias mklink="cmd.exe /c mklink"
