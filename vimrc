@@ -49,14 +49,13 @@ vnoremap { ><ESC>`<O{<ESC>`>o}<ESC>`<
 set noswapfile
 
 " Vim-Plug
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-let plug_vim = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs '.plug_vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
@@ -73,7 +72,7 @@ let g:lightline = {
 
 " Plugin Keymap
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :Files<CR>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>t :Tags<CR>
