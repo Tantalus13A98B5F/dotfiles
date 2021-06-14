@@ -21,7 +21,7 @@ git config --global alias.show-unchanged "ls-files -v"
 if [ -n "$(which git.exe)" ] && [ "$(which git.exe)" != "$(which git).exe" ]; then
     GfWPath="$(dirname "$(dirname "$(which git.exe)")")"
     GCMCore="$GfWPath/mingw64/libexec/git-core/git-credential-manager.exe"
-    git config --global credential.helper "$GCMCore"
+    git config --global credential.helper "${GCMCore/ /\\ }"
 fi
 
 echo 'Configured: vimrc, tmux.conf, bash_aliases.wsl, gitconfig;'
