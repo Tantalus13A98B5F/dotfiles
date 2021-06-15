@@ -4,11 +4,13 @@ cd "$HOME"
 
 ln -s "$DOTF/vimrc" .vimrc
 ln -s "$DOTF/tmux.conf" .tmux.conf
+
+# WSL only
 if [ -n "$(uname -r | grep microsoft)" ]; then
     ln -s "$DOTF/bash_aliases.wsl" .bash_aliases
+    $DOTF/wslconf.sh
 fi
 
-./gitconf.sh
+$DOTF/gitconf.sh
 
-echo 'Configured: vimrc, tmux.conf, bash_aliases.wsl, gitconfig;'
 echo 'Set up your proxy and open `vim` to continue.'
