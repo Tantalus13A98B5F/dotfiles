@@ -29,8 +29,9 @@ autocmd BufReadPost *
   \ if line("'\"") > 1 && line("'\"") <= line("$") |
   \ execute "normal! g'\"" | endif
 set mouse=a
-"nnoremap j gj
-"nnoremap k gk
+set ttymouse=sgr
+nnoremap j gj
+nnoremap k gk
 
 " Tags
 set tags=./.tags;
@@ -62,6 +63,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'whonore/Coqtail'
 call plug#end()
 
 " LightLine

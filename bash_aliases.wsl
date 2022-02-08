@@ -15,5 +15,4 @@ wslhost () {
 }
 
 alias powershell="powershell.exe"
-alias choco="choco.exe"
 alias mklink="cmd.exe /c mklink"
