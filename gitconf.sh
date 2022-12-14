@@ -13,6 +13,6 @@ $GIT config --global alias.show-unchanged "ls-files -v"
 GITEXE="$(which git.exe)"
 if [ "$GIT" != "git.exe" ] && [ -n "$GITEXE" ] && [ "$GITEXE" != "$(which git).exe" ]; then
     GfWPath="$(dirname "$(dirname "$GITEXE")")"
-    GCMCore="$GfWPath/mingw64/libexec/git-core/git-credential-manager-core.exe"
+    GCMCore="$GfWPath/mingw64/bin/git-credential-manager.exe"
     $GIT config --global credential.helper "${GCMCore/ /\\ }"
 fi
