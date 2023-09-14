@@ -25,3 +25,7 @@ wslhost () {
 
 alias powershell="powershell.exe"
 alias mklink="cmd.exe /c mklink"
+
+open () {
+    ( cd "$(dirname "$1")" && explorer.exe /, "$(basename "$1")" )
+}

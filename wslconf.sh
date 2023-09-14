@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$(grep umask /etc/wsl.conf 2>/dev/null)" ]; then
+if [ ! -f /etc/wsl.conf ]; then
     cat <<EOF | sudo tee -a /etc/wsl.conf >/dev/null
 [automount]
 options = "umask=022"
@@ -29,6 +29,6 @@ fi
 if [ ! -f winhome/.wslconfig ]; then
     cat >winhome/.wslconfig <<EOF
 [wsl2]
-guiApplications = false
+memory = 8GB
 EOF
 fi
