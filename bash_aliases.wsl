@@ -14,16 +14,14 @@ PS1='\[\e[92m\]\u@\h\[\e[00m\]:\[\e[94m\]\w\[\e[00m\]$(git_ps1_wsl)\n\[\e[33m\]$
 GIT_PS1_SHOWDIRTYSTATE=1
 PROMPT_DIRTRIM=3
 
-wslcd () {
-    read -r tempvar
-    cd "$(wslpath "$tempvar")"
+powershell () {
+    if [ "$1" = -nt ]; then
+        wt.exe nt -p "Windows PowerShell" -d .
+    else
+        powershell.exe "$@"
+    fi
 }
 
-wslhost () {
-    ip route | awk '/default/ {print $3}'
-}
-
-alias powershell="powershell.exe"
 alias mklink="cmd.exe /c mklink"
 
 open () {
