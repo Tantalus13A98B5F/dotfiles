@@ -11,24 +11,27 @@ EOF
 fi
 cat /etc/wsl.conf
 
-if [ -n "$1" -a ! -h winhome ]; then
-    ln -s "$1" winhome
-    if [ -d "$1/.ssh" ]; then
+WINUSPF="$(powershell.exe 'echo $env:userprofile' | sed 's/\r//')"
+WINHOME="$(wslpath ${WINUSPF})"
+
+if [ ! -h winhome ]; then
+    ln -s "$WINHOME" winhome
+    if [ -d "$WINHOME/.ssh" ]; then
         mkdir .ssh
         pushd .ssh
-        cp $1/.ssh/* .
+        cp $WINHOME/.ssh/* .
         chmod 600 *
         if [ -f config ]; then
             rm config
-            ln -s "$1/.ssh/config"
+            ln -s "$WINHOME/.ssh/config"
         fi
         popd
     fi
 fi
 
-if [ ! -f winhome/.wslconfig ]; then
-    cat >winhome/.wslconfig <<EOF
-[wsl2]
-memory = 8GB
-EOF
-fi
+#if [ ! -f winhome/.wslconfig ]; then
+#    cat >winhome/.wslconfig <<EOF
+#[wsl2]
+#memory = 8GB
+#EOF
+#fi
